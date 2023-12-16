@@ -1,4 +1,4 @@
-// swift-tools-version:4.1
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
@@ -6,30 +6,25 @@ let package = Package(
     products: [
         .library(
             name: "DBus",
-            targets: [
-                "DBus"
-            ]
-        )
-    ],
-    dependencies: [
-        .package(
-            url: "https://github.com/PureSwift/CDBus.git",
-            .branch("master")
+            targets: ["DBus"]
         )
     ],
     targets: [
+        .systemLibrary(
+            name: "CDBus",
+            pkgConfig: "dbus-1",
+            providers: [
+                .brew(["dbus"]),
+                .apt(["libdbus-1-dev"])
+            ]
+        ),
         .target(
             name: "DBus",
-            dependencies: [
-                //"CDBus"
-            ]
+            dependencies: ["CDBus"]
         ),
         .testTarget(
             name: "DBusTests",
-            dependencies: [
-                "DBus"
-            ]
-        )
-        ],
-    swiftLanguageVersions: [4]
+            dependencies: ["DBus"]
+        ),
+    ]
 )

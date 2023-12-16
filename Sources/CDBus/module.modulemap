@@ -1,0 +1,5 @@
+module CDBus [system] {
+    header "CDBus.h"
+    link "dbus-1"
+    export *
+}
