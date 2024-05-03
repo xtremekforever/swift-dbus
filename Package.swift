@@ -11,12 +11,7 @@ let package = Package(
     ],
     targets: [
         .systemLibrary(
-            name: "CDBus",
-            pkgConfig: "dbus-1",
-            providers: [
-                .brew(["dbus"]),
-                .apt(["libdbus-1-dev"])
-            ]
+            name: "CDBus"
         ),
         .target(
             name: "DBus",
